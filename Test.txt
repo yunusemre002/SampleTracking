@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 test data 
 edit
 edit2
+=======
+test data
+>>>>>>> parent of 6546d8d... changed Test.txt
