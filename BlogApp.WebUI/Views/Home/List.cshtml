@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Sample>
 @{
     ViewData["Title"] = "List";
 }
@@ -12,169 +12,33 @@
             <table class="table table-striped" id="mydatatable">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Id</th>
                         <th scope="col">Müşteri</th>
-                        <th scope="col">Talep No</th>
+                        <th scope="col">Beden</th>
+                        <th scope="col">Tipi</th>
                         <th scope="col">Geliş Tarihi</th>
-                        <th scope="col">Termin</th>
-                        <th scope="col">Artikel</th>
+                        <th scope="col">Personel</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>asdf</td>
-                        <td>dd</td>
-                        <td>24.5.2018</td>
-                        <td>mddo</td>
-                        <td>156533</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
 
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>asdf</td>
-                        <td>Otto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>1562253</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>dddd</td>
-                        <td>24.5.2015</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.SampleId</th>
+                            <td>@item.Customer</td>
+                            <td>@item.Size</td>
+                            <td>@item.SampleType</td>
+                            <td>@item.RequestDate</td>
+                            <td>@item.EmployeeId</td>
+                            <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
+                            <td><button class="btn btn-sm btn-danger">Sil</button></td>
+                        </tr>
+                    }
 
 
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Marrrrrrrrk</td>
-                        <td>Otssssssssto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>werwerMark</td>
-                        <td>Otdfscvvvto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>sdfasdfMark</td>
-                        <td>Otto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>asdf</td>
-                        <td>dd</td>
-                        <td>24.5.2018</td>
-                        <td>mddo</td>
-                        <td>156533</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>asdf</td>
-                        <td>Otto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>1562253</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>dddd</td>
-                        <td>24.5.2015</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-
-
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Marrrrrrrrk</td>
-                        <td>Otssssssssto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>werwerMark</td>
-                        <td>Otdfscvvvto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>sdfasdfMark</td>
-                        <td>Otto</td>
-                        <td>24.5.2018</td>
-                        <td>mdo</td>
-                        <td>15653</td>
-                        <td><button class="btn btn-sm btn-warning">Güncelle</button></td>
-                        <td><button class="btn btn-sm btn-danger">Sil</button></td>
-                    </tr>
 
                 </tbody>
             </table>

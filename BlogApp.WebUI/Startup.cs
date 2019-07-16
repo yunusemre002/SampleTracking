@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using ProjectManagement.Data.Abstract;
+using ProjectManagement.Data.Concrete.EFCore;
 
 namespace BlogApp.WebUI
 {
@@ -26,6 +29,9 @@ namespace BlogApp.WebUI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ISampleRepository, EfSampleRepository>();
+            services.AddTransient<IEmployeeRepository, EfEmployeeRepository>();
+            services.AddDbContext<PMContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b=>b.MigrationsAssembly("ProjectManagement.WebUI")));
             services.AddMvc();
         }
 
@@ -51,6 +57,8 @@ namespace BlogApp.WebUI
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SeedData.Seed(app);
         }
     }
 }
