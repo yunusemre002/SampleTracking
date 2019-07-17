@@ -44,6 +44,11 @@ namespace ProjectManagement.Data.Concrete.EFCore
             return context.Samples.FirstOrDefault(p => p.SampleId == sampleId);
         }
 
+        public SampleStatics GetSampleStatics()
+        {
+            return new SampleStatics() { OpenSampleCount = 2, ClosedSampleCount = 5 };
+        }
+
         public void updateSample(Sample entity)
         {
             context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

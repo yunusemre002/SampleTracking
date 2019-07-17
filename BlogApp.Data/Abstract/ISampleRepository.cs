@@ -13,5 +13,6 @@ namespace ProjectManagement.Data.Abstract
         void addSample(Sample entity);
         void updateSample(Sample entity);
         void deleteSample(int sampleId);
+        SampleStatics GetSampleStatics();
     }
 }
