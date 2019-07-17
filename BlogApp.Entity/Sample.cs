@@ -12,6 +12,8 @@ namespace ProjectManagement.Entity
 
         public string Size { get; set; }
 
+        public string SampleState { get; set; }
+
         public string SampleType { get; set; }
 
         public DateTime RequestDate { get; set; }

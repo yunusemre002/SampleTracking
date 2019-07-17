@@ -47,6 +47,7 @@ namespace ProjectManagement.Data.Concrete.EFCore
         public void updateSample(Sample entity)
         {
             context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }

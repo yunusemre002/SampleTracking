@@ -31,10 +31,10 @@ namespace ProjectManagement.Data.Concrete.EFCore
             if (!context.Samples.Any())
             {
                 context.Samples.AddRange(
-                        new Sample() { Customer="Müşteri1",EmployeeId=1,RequestDate=DateTime.Now.AddDays(-5),SampleType="Numune1 Tip",Size="XXL"},
-                        new Sample() { Customer="Müşteri2",EmployeeId=2,RequestDate=DateTime.Now.AddDays(-6),SampleType="Numune2 Tip",Size="XXL"},
-                        new Sample() { Customer="Müşteri2",EmployeeId=2,RequestDate=DateTime.Now.AddDays(-7),SampleType="Numune3 Tip",Size="XXL"},
-                        new Sample() { Customer="Müşteri3",EmployeeId=3,RequestDate=DateTime.Now.AddDays(-8),SampleType="Numune2 Tip",Size="XXL"}
+                        new Sample() { Customer="Müşteri2",EmployeeId=2,RequestDate=DateTime.Now.AddDays(-6),SampleType="Numune2 Tip",Size="XXL", SampleState="Yeni"},
+                        new Sample() { Customer="Müşteri1",EmployeeId=1,RequestDate=DateTime.Now.AddDays(-5),SampleType="Numune1 Tip",Size="XXL", SampleState="İşlemde"},
+                        new Sample() { Customer="Müşteri2",EmployeeId=2,RequestDate=DateTime.Now.AddDays(-7),SampleType="Numune3 Tip",Size="XXL", SampleState="Tamamlandı"},
+                        new Sample() { Customer="Müşteri3",EmployeeId=3,RequestDate=DateTime.Now.AddDays(-8),SampleType="Numune2 Tip",Size="XXL", SampleState="Beklemede"}
                     );
                 context.SaveChanges();
             }

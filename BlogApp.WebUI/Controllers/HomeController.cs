@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Data.Abstract;
 using ProjectManagement.Data.Concrete.EFCore;
+using ProjectManagement.Entity;
 
 namespace BlogApp.WebUI.Controllers
 {
@@ -23,9 +24,19 @@ namespace BlogApp.WebUI.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-            return View();
+            var sample=sampleRepository.GetById(id);
+
+            return View(sample);
+        }
+
+        [HttpPost]
+        public IActionResult Details(Sample sample)
+        {
+            sampleRepository.updateSample(sample);
+
+            return RedirectToAction("Details",sample.SampleId);
         }
 
         public IActionResult List()
