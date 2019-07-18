@@ -31,6 +31,14 @@ namespace BlogApp.WebUI.Controllers
             return View(sample);
         }
 
+        public IActionResult Delete(int id)
+        {
+            sampleRepository.deleteSample(id);
+            var samples = sampleRepository.GetAll();
+            ViewBag.alertMessage = "Delete";
+            return View("List",samples);
+        }
+
         [HttpPost]
         public IActionResult Details(Sample sample)
         {

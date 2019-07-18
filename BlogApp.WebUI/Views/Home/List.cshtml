@@ -1,6 +1,18 @@
 ﻿@model IEnumerable<Sample>
 @{
-    ViewData["Title"] = "List";
+    var alertClass = "initial";
+    var alertText = "initial";
+
+    if (ViewBag.alertMessage == "Delete")
+    {
+        alertClass = "success";
+        alertText = "Kayıt Silindi";
+    }
+    else if (ViewBag.alertMessage == "Error")
+    {
+        alertClass = "danger";
+        alertText = "Hata Oluştu.";
+    }
 }
 
 <div class="container mt-3">
@@ -12,6 +24,19 @@
             </ul>
         </div>
         <div class="col-md-9">
+
+            @{
+                if (alertClass != "initial")
+                {
+                    <div class="alert alert-@alertClass alert-dismissible fade show mb-2" role="alert">
+                        <strong>@alertText</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                }
+            }
+
             <table class="table table-striped table-responsive table-sm table-hover" id="mydatatable">
                 <thead>
                     <tr>
@@ -37,24 +62,24 @@
 
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <th scope="row">@item.SampleId</th>
-                        <td>@item.Customer</td>
-                        <td>@item.Size</td>
-                        <td>@item.SampleType</td>
-                        <td>@item.RequestDate</td>
-                        <td>@item.EmployeeId</td>
-                        <td>xxxxx</td>
-                        <td>xxxxx</td>
-                        <td>xxxxx</td>
-                        <td>xxxxx</td>
-                        <td>xxxxx</td>
-                        <td>xxxxx</td>
-                        <td>xxxxx</td>
-                        <td>xxxxx</td>
-                        <td><a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Details" asp-route-id="@item.SampleId">Güncelle</a></td>
-                        <td><a class="btn btn-sm btn-danger">Sil</a></td>
-                    </tr>
+                        <tr>
+                            <th scope="row">@item.SampleId</th>
+                            <td>@item.Customer</td>
+                            <td>@item.Size</td>
+                            <td>@item.SampleType</td>
+                            <td>@item.RequestDate</td>
+                            <td>@item.EmployeeId</td>
+                            <td>xxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxx</td>
+                            <td>xxxxx</td>
+                            <td><a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Details" asp-route-id="@item.SampleId">Güncelle</a></td>
+                            <td><a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@item.SampleId" onclick="return confirmDel();">Sil</a></td>
+                        </tr>
                     }
 
 
@@ -75,7 +100,22 @@
 
 
 <script type="text/javascript">
+
+
+    function confirmDel() {
+        var agree = confirm("Bu içeriği silmek istediğinizden emin misiniz?\nBu işlem geri alınamaz!");
+        if (agree) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     $(document).ready(function () {
+
+
+
         $('#mydatatable').DataTable({
             dom: 'Bfrtip',
             buttons: [
