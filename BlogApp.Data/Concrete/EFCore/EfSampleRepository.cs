@@ -17,10 +17,11 @@ namespace ProjectManagement.Data.Concrete.EFCore
             context = _context;
         }
 
-        public void addSample(Sample entity)
+        public Sample addSample(Sample entity)
         {
             context.Samples.Add(entity);
             context.SaveChanges();
+            return entity;
         }
 
         public void deleteSample(int sampleId)

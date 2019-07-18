@@ -10,7 +10,7 @@ namespace ProjectManagement.Data.Abstract
     {
         Sample GetById(int sampleId);
         IQueryable<Sample> GetAll();
-        void addSample(Sample entity);
+        Sample addSample(Sample entity);
         void updateSample(Sample entity);
         void deleteSample(int sampleId);
         SampleStatics GetSampleStatics();

@@ -1,0 +1,72 @@
+﻿@model Sample
+
+@{ 
+    var alertClass = "initial";
+    var alertText = "initial";
+
+    if (ViewBag.alertMessage == "Ok") {
+        alertClass = "success";
+        alertText = "Yeni bir iş eklendi.";
+    }
+    else if(ViewBag.alertMessage == "Error")
+    {
+        alertClass = "danger";
+        alertText = "Hata Oluştu.";
+    }
+}
+
+<div class="row mt-3 justify-content-center">
+
+    <div class="col-md-8 ">
+        <div class="card">
+       @{ 
+           if (alertClass != "initial") {
+            <div class="alert alert-@alertClass alert-dismissible fade show mb-2" role="alert">
+                <strong>@alertText</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            }
+        }
+            <div class="card-header">
+                Yeni İş
+            </div>
+            <div class="card-body">
+                <form asp-controller="Home" asp-action="Create" method="post">
+                    <div class="form-group">
+                        <label>Çalışan:</label>
+                        <input asp-for="EmployeeId" class="form-control" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Müşteri:</label>
+                            <input asp-for="Customer" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>İstek Tarihi:</label>
+                            <input asp-for="RequestDate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label>Durumu:</label>
+                            <input asp-for="SampleState" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label>Tipi:</label>
+                            <input asp-for="SampleType" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Beden:</label>
+                            <input asp-for="Size" class="form-control" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-warning">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

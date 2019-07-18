@@ -39,6 +39,30 @@ namespace BlogApp.WebUI.Controllers
             return RedirectToAction("Details",sample.SampleId);
         }
 
+        public IActionResult Create()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Sample sample)
+        {
+            Sample sampleOk=sampleRepository.addSample(sample);
+            if (sampleOk !=null)
+            {
+                ViewBag.alertMessage = "Ok";
+            }
+            else
+            {
+                ViewBag.alertMessage = "Error";
+            }
+
+            return View(sampleOk);
+        }
+
+
+
         public IActionResult List()
         {
 
