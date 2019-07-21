@@ -47,7 +47,12 @@ namespace ProjectManagement.Data.Concrete.EFCore
 
         public SampleStatics GetSampleStatics()
         {
-            return new SampleStatics() { OpenSampleCount = 2, ClosedSampleCount = 5 };
+            SampleStatics sampleStatics = new SampleStatics();
+
+
+            sampleStatics.OpenSampleCount = context.Samples.Count(i=>i.SampleState=="Yeni");
+            sampleStatics.ClosedSampleCount = context.Samples.Count(i => i.SampleState == "Tamamlandı"); ;
+            return sampleStatics;
         }
 
         public void updateSample(Sample entity)

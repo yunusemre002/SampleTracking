@@ -9,6 +9,7 @@ using ProjectManagement.Data.Concrete.EFCore;
 using ProjectManagement.Entity;
 using Newtonsoft.Json;
 using ProjectManagement.Data.Abstract;
+using System.Collections;
 
 namespace ProjectManagement.WebUI.Controllers
 {
@@ -18,11 +19,13 @@ namespace ProjectManagement.WebUI.Controllers
     {
         private readonly PMContext _context;
         private ISampleRepository _sampleRepository;
+        private IEmployeeRepository _employeeRepository;
 
-        public ApiSamplesController(PMContext context, ISampleRepository sampleRepository)
+        public ApiSamplesController(PMContext context, ISampleRepository sampleRepository, IEmployeeRepository employeeRepository)
         {
             _context = context;
             _sampleRepository = sampleRepository;
+            _employeeRepository = employeeRepository;
         }
 
         [HttpGet]
@@ -37,6 +40,20 @@ namespace ProjectManagement.WebUI.Controllers
         {
             return _sampleRepository.GetSampleStatics();
         }
+
+        [HttpGet]
+
+        public ActionResult<IEnumerable<EmployeeStatics>> GetEmployeeStatics()
+        {
+            List<EmployeeStatics> a1=new List<EmployeeStatics>();
+            foreach (var employee in _employeeRepository.GetAll())
+            {
+                a1.Add(_employeeRepository.GetEmployeeStatics(employee.EmployeeId));
+            }
+            return a1;
+        }
+
+
 
         // GET: api/ApiSamples/5
         [HttpGet("{id}")]

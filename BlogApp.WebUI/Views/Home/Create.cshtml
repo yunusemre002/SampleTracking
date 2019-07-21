@@ -1,34 +1,9 @@
 ﻿@model Sample
 
-@{ 
-    var alertClass = "initial";
-    var alertText = "initial";
-
-    if (ViewBag.alertMessage == "Ok") {
-        alertClass = "success";
-        alertText = "Yeni bir iş eklendi.";
-    }
-    else if(ViewBag.alertMessage == "Error")
-    {
-        alertClass = "danger";
-        alertText = "Hata Oluştu.";
-    }
-}
-
 <div class="row mt-3 justify-content-center">
 
     <div class="col-md-8 ">
         <div class="card">
-       @{ 
-           if (alertClass != "initial") {
-            <div class="alert alert-@alertClass alert-dismissible fade show mb-2" role="alert">
-                <strong>@alertText</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            }
-        }
             <div class="card-header">
                 Yeni İş
             </div>

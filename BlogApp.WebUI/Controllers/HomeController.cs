@@ -35,7 +35,9 @@ namespace BlogApp.WebUI.Controllers
         {
             sampleRepository.deleteSample(id);
             var samples = sampleRepository.GetAll();
-            ViewBag.alertMessage = "Delete";
+            TempData["alertClass"] = "danger";
+            TempData["alertMessage"] = id+" numaralı kayıt silindi.";
+
             return View("List",samples);
         }
 
@@ -43,7 +45,8 @@ namespace BlogApp.WebUI.Controllers
         public IActionResult Details(Sample sample)
         {
             sampleRepository.updateSample(sample);
-
+            TempData["alertClass"] = "success";
+            TempData["alertMessage"] = sample.SampleId + " numaralı kayıt güncellendi.";
             return RedirectToAction("Details",sample.SampleId);
         }
 
@@ -59,11 +62,13 @@ namespace BlogApp.WebUI.Controllers
             Sample sampleOk=sampleRepository.addSample(sample);
             if (sampleOk !=null)
             {
-                ViewBag.alertMessage = "Ok";
+                TempData["alertClass"] = "success";
+                TempData["alertMessage"] = sampleOk.SampleId + " numaralı kayıt eklendi.";
             }
             else
             {
-                ViewBag.alertMessage = "Error";
+                TempData["alertClass"] = "danger";
+                TempData["alertMessage"] = "Hata oluştu.";
             }
 
             return View(sampleOk);

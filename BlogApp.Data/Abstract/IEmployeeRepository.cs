@@ -13,6 +13,7 @@ namespace ProjectManagement.Data.Abstract
         void AddEmployee(Employee entity);
         void UpdateEmployee(Employee entity);
         void DeleteEmployee(int employeeId);
+        EmployeeStatics GetEmployeeStatics(int employeeId);
 
 
     }
