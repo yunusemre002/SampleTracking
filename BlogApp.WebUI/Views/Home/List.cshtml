@@ -19,13 +19,6 @@
                                 <th scope="col">Tipi</th>
                                 <th scope="col">Geliş Tarihi</th>
                                 <th scope="col">Personel</th>
-                                <th scope="col">xxxxx</th>
-                                <th scope="col">xxxxx</th>
-                                <th scope="col">xxxxx</th>
-                                <th scope="col">xxxxx</th>
-                                <th scope="col">xxxxx</th>
-                                <th scope="col">xxxxx</th>
-                                <th scope="col">xxxxx</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -39,13 +32,6 @@
                                     <td>@item.SampleType</td>
                                     <td>@item.RequestDate.ToString("d")</td>
                                     <td>@item.EmployeeId</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
                                     <td>
                                         <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Details" asp-route-id="@item.SampleId">Güncelle</a>
                                         <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@item.SampleId" onclick="return confirmDel();">Sil</a>

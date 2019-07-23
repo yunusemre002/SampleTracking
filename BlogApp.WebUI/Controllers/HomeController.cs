@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectManagement.Data.Abstract;
 using ProjectManagement.Data.Concrete.EFCore;
 using ProjectManagement.Entity;
@@ -13,10 +14,12 @@ namespace BlogApp.WebUI.Controllers
     {
 
         private ISampleRepository sampleRepository;
+        private IEmployeeRepository employeeRepository;
 
-        public HomeController(ISampleRepository sampleRepo)
+        public HomeController(ISampleRepository sampleRepo, IEmployeeRepository _employeeRepo)
         {
             sampleRepository = sampleRepo;
+            employeeRepository = _employeeRepo;
         }
 
         public IActionResult Index()
@@ -44,34 +47,56 @@ namespace BlogApp.WebUI.Controllers
         [HttpPost]
         public IActionResult Details(Sample sample)
         {
-            sampleRepository.updateSample(sample);
-            TempData["alertClass"] = "success";
-            TempData["alertMessage"] = sample.SampleId + " numaralı kayıt güncellendi.";
-            return RedirectToAction("Details",sample.SampleId);
+            if (ModelState.IsValid)
+            {
+                sampleRepository.updateSample(sample);
+                TempData["alertClass"] = "success";
+                TempData["alertMessage"] = sample.SampleId + " numaralı kayıt güncellendi.";
+                return View(sample);
+            }
+            else
+            {
+                TempData["alertClass"] = "danger";
+                TempData["alertMessage"] = "Hata oluştu.";
+                
+                return View(sample);
+            }
         }
 
         public IActionResult Create()
         {
-            
+            ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Sample sample)
         {
-            Sample sampleOk=sampleRepository.addSample(sample);
-            if (sampleOk !=null)
+
+            if (ModelState.IsValid)
             {
-                TempData["alertClass"] = "success";
-                TempData["alertMessage"] = sampleOk.SampleId + " numaralı kayıt eklendi.";
+                Sample sampleOk = sampleRepository.addSample(sample);
+                if (sampleOk != null)
+                {
+                    TempData["alertClass"] = "success";
+                    TempData["alertMessage"] = sampleOk.SampleId + " numaralı kayıt eklendi.";
+                }
+                else
+                {
+                    TempData["alertClass"] = "danger";
+                    TempData["alertMessage"] = "Hata oluştu.";
+                }
+
+                return View(sampleOk);
             }
             else
             {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
                 TempData["alertClass"] = "danger";
                 TempData["alertMessage"] = "Hata oluştu.";
+                return View(sample);
             }
 
-            return View(sampleOk);
         }
 
 

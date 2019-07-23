@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectManagement.Data.Concrete.EFCore;
 
 namespace ProjectManagement.WebUI.Migrations
 {
     [DbContext(typeof(PMContext))]
-    partial class PMContextModelSnapshot : ModelSnapshot
+    [Migration("20190723125924_entity_update")]
+    partial class entity_update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,62 +42,66 @@ namespace ProjectManagement.WebUI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AccessoryOrderDate")
+                    b.Property<DateTime>("AccessoryOrderDate")
                         .HasColumnType("Date");
 
-                    b.Property<string>("AccessoryTermin");
+                    b.Property<string>("AksesuarTermin");
 
                     b.Property<string>("Artikel")
-                        .IsRequired();
-
-                    b.Property<string>("Color")
                         .IsRequired();
 
                     b.Property<string>("Customer")
                         .IsRequired();
 
-                    b.Property<string>("CustomerModelNo")
-                        .IsRequired();
-
-                    b.Property<string>("DelayDescription");
-
-                    b.Property<DateTime?>("DeliveryDate")
+                    b.Property<DateTime>("DeliveryhDate")
                         .HasColumnType("Date");
-
-                    b.Property<string>("DeliveryTime");
 
                     b.Property<int>("EmployeeId");
 
-                    b.Property<DateTime?>("MeshFinishDate")
+                    b.Property<string>("GecikmeAciklama");
+
+                    b.Property<int>("IstenenAdet");
+
+                    b.Property<DateTime>("MeshFinishDate")
                         .HasColumnType("Date");
 
-                    b.Property<string>("ModelDescription");
+                    b.Property<string>("ModelAciklamasi")
+                        .IsRequired();
 
-                    b.Property<DateTime?>("PaintDeliveryDate")
+                    b.Property<string>("ModelistVeArgeci")
+                        .IsRequired();
+
+                    b.Property<string>("MusteriModelNumarasi")
+                        .IsRequired();
+
+                    b.Property<DateTime>("PaintDeliveryDate")
                         .HasColumnType("Date");
 
-                    b.Property<DateTime?>("PaintFinishDate")
+                    b.Property<DateTime>("PaintFinishDate")
                         .HasColumnType("Date");
+
+                    b.Property<string>("Renk")
+                        .IsRequired();
 
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("Date");
 
-                    b.Property<int>("RequestedCount");
-
-                    b.Property<string>("SampleState")
-                        .IsRequired();
+                    b.Property<string>("SampleState");
 
                     b.Property<string>("SampleType")
                         .IsRequired();
 
-                    b.Property<DateTime?>("SewingFinishDate")
+                    b.Property<DateTime>("SewingFinishDate")
                         .HasColumnType("Date");
 
-                    b.Property<string>("Size")
-                        .IsRequired();
+                    b.Property<string>("Size");
+
+                    b.Property<string>("SonDurum");
 
                     b.Property<string>("Termin")
                         .IsRequired();
+
+                    b.Property<string>("TeslimSuresi");
 
                     b.HasKey("SampleId");
 
