@@ -1,0 +1,36 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="row mt-3 justify-content-center">
+
+    <div class="col-md-8 ">
+        <div class="card">
+            <div class="card-header">
+                @Model.EmployeeId numaralı çalışan.
+            </div>
+            <div class="card-body">
+                <form asp-controller="Employee" asp-action="Details" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="EmployeeId" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Adı:</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>İstek Tarihi:</label>
+                            <input asp-for='Surname' class="form-control" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

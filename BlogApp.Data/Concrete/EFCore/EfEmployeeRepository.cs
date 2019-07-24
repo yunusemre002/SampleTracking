@@ -56,6 +56,7 @@ namespace ProjectManagement.Data.Concrete.EFCore
         public void UpdateEmployee(Employee entity)
         {
             context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }
