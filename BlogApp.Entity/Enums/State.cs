@@ -10,6 +10,7 @@ namespace ProjectManagement.Entity.Enums
         Yeni=1,
         Boyada =2,
         Tamamlandı=3,
-        Beklemede =4
+        Beklemede =4,
+        Yunusda=5
     }
 }

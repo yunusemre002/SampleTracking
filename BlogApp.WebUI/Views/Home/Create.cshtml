@@ -83,15 +83,20 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label>Renk:</label>
                                     <input asp-for="Color" class="form-control" />
                                     <span asp-validation-for="Color" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label>Adet:</label>
                                     <input asp-for="RequestedCount" class="form-control" />
                                     <span asp-validation-for="RequestedCount" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Talep No:</label>
+                                    <input asp-for="RequestNo" class="form-control" />
+                                    <span asp-validation-for="RequestNo" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>

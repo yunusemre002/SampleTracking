@@ -14,6 +14,9 @@ namespace ProjectManagement.Entity
         [Required(ErrorMessage = "Müşteri giriniz. ")]
         public string Customer { get; set; }
 
+        [Required(ErrorMessage = "Talep No giriniz. ")]
+        public string RequestNo { get; set; }
+
         [Required(ErrorMessage = "Beden Seçiniz.")]
         public string Size { get; set; }
 
@@ -36,9 +39,11 @@ namespace ProjectManagement.Entity
 
         public Employee Employee { get; set; }
 
-
-        [Required(ErrorMessage = "Termin giriniz")]
-        public string Termin { get; set; }         //????????
+        [Required(ErrorMessage = "Termin Tarihini giriniz.")]
+        [Column(TypeName = "Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime Termin { get; set; }
 
         [Required(ErrorMessage = "Artikel giriniz.")]
         public string Artikel { get; set; }
