@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectManagement.Entity.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,8 +17,9 @@ namespace ProjectManagement.Entity
         [Required(ErrorMessage = "Beden Seçiniz.")]
         public string Size { get; set; }
 
+        [EnumDataType(typeof(State))]
         [Required(ErrorMessage = "Durum Seçiniz.")]
-        public string SampleState { get; set; }
+        public State SampleState { get; set; }
 
         [Required(ErrorMessage = "Numune Tipi giriniz.")]
         public string SampleType { get; set; }

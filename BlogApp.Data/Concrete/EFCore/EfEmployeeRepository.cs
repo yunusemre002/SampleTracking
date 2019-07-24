@@ -43,8 +43,8 @@ namespace ProjectManagement.Data.Concrete.EFCore
         {
             EmployeeStatics employeeStatics = new EmployeeStatics();
             employeeStatics.EmployeeName = GetById(employeeId).Name;
-            employeeStatics.ClosedIssues = context.Samples.Count(i=>i.EmployeeId==employeeId && i.SampleState=="Tamamlandı");
-            employeeStatics.OpenIssues = context.Samples.Count(i=>i.EmployeeId==employeeId && i.SampleState == "Yeni");
+            employeeStatics.ClosedIssues = context.Samples.Count(i=>i.EmployeeId==employeeId && i.SampleState==Entity.Enums.State.Tamamlandı);
+            employeeStatics.OpenIssues = context.Samples.Count(i=>i.EmployeeId==employeeId && i.SampleState == Entity.Enums.State.Yeni);
             return employeeStatics;
         }
 

@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>İstek Tarihi:</label>
-                                    <input asp-for='RequestDate' class="form-control" />
+                                    <input asp-for='RequestDate'  class="form-control" />
                                     <span asp-validation-for="RequestDate" class="text-danger"></span>
                                 </div>
                             </div>
@@ -42,8 +42,9 @@
 
                                 <div class="form-group col-md-4">
                                     <label>Durumu:</label>
-                                    <input asp-for="SampleState" class="form-control" />
-                                    <span asp-validation-for="SampleState" class="text-danger"></span>
+                                    <select asp-items="@ViewBag.States" asp-for="SampleState" class="form-control">
+                                        <option selected disabled>Seçiniz</option>
+                                    </select>
                                 </div>
 
                       

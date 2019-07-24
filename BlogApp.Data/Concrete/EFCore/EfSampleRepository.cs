@@ -50,8 +50,8 @@ namespace ProjectManagement.Data.Concrete.EFCore
             SampleStatics sampleStatics = new SampleStatics();
 
 
-            sampleStatics.OpenSampleCount = context.Samples.Count(i=>i.SampleState=="Yeni");
-            sampleStatics.ClosedSampleCount = context.Samples.Count(i => i.SampleState == "Tamamlandı"); ;
+            sampleStatics.OpenSampleCount = context.Samples.Count(i=>i.SampleState==Entity.Enums.State.Yeni);
+            sampleStatics.ClosedSampleCount = context.Samples.Count(i => i.SampleState == Entity.Enums.State.Tamamlandı); ;
             return sampleStatics;
         }
 

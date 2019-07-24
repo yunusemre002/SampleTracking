@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectManagement.Data.Abstract;
 using ProjectManagement.Data.Concrete.EFCore;
 using ProjectManagement.Entity;
+using ProjectManagement.Entity.Enums;
 
 namespace BlogApp.WebUI.Controllers
 {
@@ -31,6 +32,7 @@ namespace BlogApp.WebUI.Controllers
         {
             var sample=sampleRepository.GetById(id);
             ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
+            ViewBag.States = new SelectList(Enum.GetNames(typeof(State)));
             return View(sample);
         }
 
@@ -48,6 +50,7 @@ namespace BlogApp.WebUI.Controllers
         public IActionResult Details(Sample sample)
         {
             ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
+            ViewBag.States = new SelectList(Enum.GetNames(typeof(State)));
 
             if (ModelState.IsValid)
             {
@@ -68,12 +71,15 @@ namespace BlogApp.WebUI.Controllers
         public IActionResult Create()
         {
             ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
+            ViewBag.States = new SelectList(Enum.GetNames(typeof(State)));
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Sample sample)
         {
+            ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
+            ViewBag.States = new SelectList(Enum.GetNames(typeof(State)));
 
             if (ModelState.IsValid)
             {
