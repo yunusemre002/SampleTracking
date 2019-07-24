@@ -27,10 +27,14 @@
 
                                 <div class="form-group col-md-4">
                                     <label>Çalışan:</label>
-                                    <select asp-items="@ViewBag.Employees" asp-for="EmployeeId" class="form-control">
-                                        <option selected disabled>Seçiniz</option>
-                                    </select>
+                                    <div class="form-inline">
+                                        <select asp-items="@ViewBag.Employees" asp-for="EmployeeId" class="form-control w-75">
+                                            <option selected disabled>Seçiniz</option>
+                                        </select>
+                                        <a asp-action="Create" asp-controller="Employee" class="fas fa-user-plus ml-3"></a>
+                                    </div>
                                     <span asp-validation-for="EmployeeId" class="text-danger"></span>
+
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>İstek Tarihi:</label>
