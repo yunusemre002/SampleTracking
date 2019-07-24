@@ -30,7 +30,7 @@ namespace BlogApp.WebUI.Controllers
         public IActionResult Details(int id)
         {
             var sample=sampleRepository.GetById(id);
-
+            ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
             return View(sample);
         }
 
@@ -47,6 +47,8 @@ namespace BlogApp.WebUI.Controllers
         [HttpPost]
         public IActionResult Details(Sample sample)
         {
+            ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
+
             if (ModelState.IsValid)
             {
                 sampleRepository.updateSample(sample);
@@ -103,7 +105,8 @@ namespace BlogApp.WebUI.Controllers
 
         public IActionResult List()
         {
-
+            IQueryable<Employee> list = employeeRepository.GetAll();
+            ViewBag.employeeList = list;
             return View(sampleRepository.GetAll());
         }
         public IActionResult Gantt()

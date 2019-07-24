@@ -3,22 +3,23 @@
 
 <div class="container mt-3">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <ul class="list-group">
                 <a asp-controller="Home" asp-action="Create" class="list-group-item active">Yeni Ekle</a>
                 <a class="list-group-item">Başka Bir</a>
             </ul>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
 
                     <table class="table table-striped table-responsive table-sm table-hover" id="mydatatable">
                         <thead>
                             <tr>
+                                <th scope="col">Durumu</th>
                                 <th scope="col">Müşteri</th>
+                                <th scope="col">Personel</th>
+                                <th scope="col">Geliş Tarihi</th>
                                 <th scope="col">Beden</th>
                                 <th scope="col">Tipi</th>
-                                <th scope="col">Geliş Tarihi</th>
-                                <th scope="col">Personel</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -26,17 +27,20 @@
 
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>@item.Customer</td>
-                                    <td>@item.Size</td>
-                                    <td>@item.SampleType</td>
-                                    <td>@item.RequestDate.ToString("d")</td>
-                                    <td>@item.EmployeeId</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Details" asp-route-id="@item.SampleId">Güncelle</a>
-                                        <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@item.SampleId" onclick="return confirmDel();">Sil</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>@item.SampleState</td>
+                                <td>@item.Customer</td>
+                                <td>@( (ViewBag.employeeList as IQueryable<Employee>).FirstOrDefault(q=>q.EmployeeId==item.EmployeeId).Name)</td>
+                                <td>@item.RequestDate.ToString("d")</td>
+                                <td>@item.Size</td>
+                                <td>@item.SampleType</td>
+
+
+                                <td>
+                                    <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Details" asp-route-id="@item.SampleId">Güncelle</a>
+                                    <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@item.SampleId" onclick="return confirmDel();">Sil</a>
+                                </td>
+                            </tr>
                             }
 
                         </tbody>
@@ -108,7 +112,7 @@
 
         $('#mydatatable thead tr:eq(1) th').each(function (i) {
             var title = $(this).text();
-            $(this).html('<input type="text" scope="col" placeholder="' + title + 'Ara" />');
+            $(this).html('<input type="text" scope="col" placeholder="' + title + ' Ara" />');
 
             $('input', this).on('keyup change', function () {
                 if (table.column(i).search() !== this.value) {
