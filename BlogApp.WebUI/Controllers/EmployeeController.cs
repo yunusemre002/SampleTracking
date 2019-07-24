@@ -80,7 +80,7 @@ namespace BlogApp.WebUI.Controllers
                
              
 
-                return View(employee);
+                return View("Details", employee);
             }
             else
             {

@@ -43,6 +43,11 @@ namespace BlogApp.WebUI.Controllers
             TempData["alertClass"] = "danger";
             TempData["alertMessage"] = id+" numaralı kayıt silindi.";
 
+            //employelist'i view'a taşımank için
+            IQueryable<Employee> list = employeeRepository.GetAll();
+            ViewBag.employeeList = list;
+
+
             return View("List",samples);
         }
 
@@ -88,14 +93,16 @@ namespace BlogApp.WebUI.Controllers
                 {
                     TempData["alertClass"] = "success";
                     TempData["alertMessage"] = sampleOk.SampleId + " numaralı kayıt eklendi.";
+                    return View("Details", sampleOk);
                 }
                 else
                 {
                     TempData["alertClass"] = "danger";
                     TempData["alertMessage"] = "Hata oluştu.";
+                    return View(sample);
                 }
 
-                return View(sampleOk);
+                
             }
             else
             {
