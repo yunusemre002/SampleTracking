@@ -3,63 +3,79 @@
     ViewData["Title"] = "Gantt";
 }
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', { 'packages': ['gantt'] });
-    google.charts.setOnLoadCallback(drawChart);
+<div class="form-group col-md-4">
+    <label>Çalışan:</label>
+    <div class="form-inline">
+        <select asp-items="@ViewBag.Employees" class="form-control w-75" id="myselect">
+            <option selected disabled>Seçiniz</option>
+        </select>
+        <a asp-action="Create" asp-controller="Employee" class="fas fa-user-plus ml-3"></a>
+    </div>
 
-    function drawChart() {
-
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Task ID');
-        data.addColumn('string', 'Modelist/Argeci');
-        data.addColumn('string', 'Müşteri');
-        data.addColumn('date', 'Start Date');
-        data.addColumn('date', 'End Date');
-        data.addColumn('number', 'Duration');
-        data.addColumn('number', 'Tamamlanma');
-        data.addColumn('string', 'Dependencies');
-
-        data.addRows([
-            ['2014Spring', 'TalepNo', 'Defacto',
-                new Date(2014, 2, 22), new Date(2014, 5, 20), null, 80, null],
-            ['2014Summer', 'Summer 2014', 'summer',
-                new Date(2014, 5, 21), new Date(2014, 8, 20), null, 100, null],
-            ['2014Autumn', 'Autumn 2014', 'autumn',
-                new Date(2014, 8, 21), new Date(2014, 11, 20), null, 100, null],
-            ['2014Winter', 'Winter 2014', 'winter',
-                new Date(2014, 11, 21), new Date(2014, 2, 21), null, 100, null],
-            ['2015Spring', 'Spring 2015', 'spring',
-                new Date(2014, 2, 22), new Date(2014, 5, 20), null, 50, null],
-            ['2015Summer', 'Summer 2015', 'summer',
-                new Date(2014, 5, 21), new Date(2014, 8, 20), null, 0, null],
-            ['2015Autumn', 'Autumn 2015', 'autumn',
-                new Date(2014, 8, 21), new Date(2014, 11, 20), null, 0, null],
-            ['2015Winter', 'Winter 2015', 'winter',
-                new Date(2014, 11, 21), new Date(2014, 2, 21), null, 0, null],
-            ['Football', 'Football Season', 'sports',
-                new Date(2014, 8, 4), new Date(2014, 1, 1), null, 100, null],
-            ['Baseball', 'Baseball Season', 'sports',
-                new Date(2014, 2, 31), new Date(2014, 9, 20), null, 14, null],
-            ['Basketball', 'Basketball Season', 'sports',
-                new Date(2014, 9, 28), new Date(2014, 5, 20), null, 86, null],
-            ['Hockey', 'Hockey Season', 'sports',
-                new Date(2014, 9, 8), new Date(2014, 5, 21), null, 89, null]
-        ]);
-
-        var options = {
-            height: 400,
-            gantt: {
-                trackHeight: 30
-            }
-        };
-
-        var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
-    }
-</script>
-<div class="mt-5">
-    <div id="chart_div"></div>
 </div>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('select').on('change', function () {
+            var id = this.value;
+            console.log(id);
+
+            $.getJSON('../api/Sample/GetEmployeeGantt/'+id, function (dataInitial) {
+               
+                
+
+                    google.charts.load('current', { 'packages': ['gantt'] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Task ID');
+                        data.addColumn('string', 'Task Name');
+                        data.addColumn('string', 'Resource');
+                        data.addColumn('date', 'Start Date');
+                        data.addColumn('date', 'End Date');
+                        data.addColumn('number', 'Duration');
+                        data.addColumn('number', 'Percent Complete');
+                        data.addColumn('string', 'Dependencies');
+
+                        console.log(dataInitial[0]);
+
+                        for (i = 0; i < dataInitial.length; i++) {
+                            data.addRows([[dataInitial[i].taskId, dataInitial[i].taskName, dataInitial[i].resource, new Date(dataInitial[i].startDate), new Date(dataInitial[i].endDate), null, 100, null]]);
+                        }
+
+
+                        //data.addRows([['2014Spring', dataInitial[0].taskName, 'spring', new Date(2014,8,25), new Date(2014, 9, 25), null, 100, null]]);
+                        //data.addRows([['2015Spring', 'Spring 2015', 'spring', new Date(2014, 8, 22), new Date(2014, 9, 20), null, 100, null]]);
+                        //data.addRows([['2016Spring', 'Spring 2015', 'spring', new Date(2014, 8, 22), new Date(2014, 9, 20), null, 100, null]]);
+
+                        var options = {
+                            height: 400,
+                            gantt: {
+                                trackHeight: 30
+                            }
+                        };
+
+                        var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+                        chart.draw(data, options);
+                    }
+
+
+                });
+
+
+            });
+        });
+
+
+</script>
+
+<div id="chart_div"></div>
+
 

@@ -14,6 +14,7 @@ namespace ProjectManagement.Data.Abstract
         void UpdateEmployee(Employee entity);
         void DeleteEmployee(int employeeId);
         EmployeeStatics GetEmployeeStatics(int employeeId);
+        IEnumerable<GanttStatics> GetGanttForEmp(int employeeId);
 
 
     }

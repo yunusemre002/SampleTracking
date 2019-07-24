@@ -55,6 +55,14 @@ namespace ProjectManagement.WebUI.Controllers
 
 
 
+        [HttpGet("{id}")]
+        public ActionResult<IEnumerable<GanttStatics>> GetEmployeeGantt(int id)
+        {
+            return _employeeRepository.GetGanttForEmp(id).ToList();
+        }
+
+
+
         // GET: api/ApiSamples/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Sample>> GetSample(int id)

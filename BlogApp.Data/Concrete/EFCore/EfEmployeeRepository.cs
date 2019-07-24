@@ -58,5 +58,34 @@ namespace ProjectManagement.Data.Concrete.EFCore
             context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
         }
+
+        public IEnumerable<GanttStatics> GetGanttForEmp(int employeeId)
+        {
+
+
+
+
+            List<GanttStatics> gs = new List<GanttStatics>();
+
+            var sampleList=context.Samples.Where(q => q.EmployeeId == employeeId).ToList();
+
+            foreach (var item in sampleList)
+            {
+                GanttStatics g1 = new GanttStatics();
+                g1.Resource = item.Customer;
+                g1.TaskId = item.SampleId.ToString();
+                g1.TaskName = item.RequestNo;            
+                g1.StartDate = item.RequestDate.Year +","+item.RequestDate.Month+","+item.RequestDate.Day;
+                g1.EndDate = item.Termin.Year + "," + item.Termin.Month + "," + item.Termin.Day;
+                g1.Duration = null;
+                g1.Percent = 100;
+                g1.Dependencies = null;
+                
+                gs.Add(g1);
+            }
+
+            return gs;
+            
+        }
     }
 }

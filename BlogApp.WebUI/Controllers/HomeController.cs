@@ -124,6 +124,7 @@ namespace BlogApp.WebUI.Controllers
         }
         public IActionResult Gantt()
         {
+            ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
             return View();
         }
     }
