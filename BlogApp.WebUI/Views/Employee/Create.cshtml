@@ -2,9 +2,9 @@
 
 <div class="container">
     <div id="accordion">
-        <form asp-controller="Employee" asp-action="Create" method="post">
+        <form asp-controller="Employee" asp-action="Create" method="post" id="userCreateForm">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="card">
+            <div class="card mb-2">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <span class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -32,7 +32,21 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Kaydet</button>
+            <div class="input-icons">
+                <a class="btn btn-warning" onclick="history.go(-1)">
+                    <i class="fas fa-arrow-alt-circle-left"></i>
+                    Geri
+                </a>
+                <a class="btn btn-danger" onclick="document.getElementById('userCreateForm').reset();">
+                    <i class="fas fa-trash-restore-alt"></i>
+                    Temizle
+                </a>
+                <button type="submit" class="btn btn-success float-right">
+                    <i class="fas fa-save mr-3">
+                    </i>
+                    Kaydet
+                </button>
+            </div>
         </form>
     </div>
 </div>
