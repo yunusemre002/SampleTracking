@@ -1,43 +1,40 @@
 ﻿@model Employee
-<div class="row mt-3 justify-content-center">
 
-    <div class="col-md-8 ">
+<div class="container">
+    <div id="accordion">
+        <form asp-controller="Employee" asp-action="Create" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <span class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Yeni Kullanıcı
+                        </span>
+                    </h5>
+                </div>
 
-
-        <div id="accordion">
-            <form asp-controller="Employee" asp-action="Create" method="post">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <span class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Yeni Kullanıcı
-                            </span>
-                        </h5>
-                    </div>
-
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Adı:</label>
-                                    <input asp-for="Name" class="form-control" />
-                                    <span asp-validation-for="Name" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label>Soyadı:</label>
-                                    <input asp-for="Surname" class="form-control" />
-                                    <span asp-validation-for="Surname" class="text-danger"></span>
-                                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Adı:</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
-                            
+
+                            <div class="form-group col-md-6">
+                                <label>Soyadı:</label>
+                                <input asp-for="Surname" class="form-control" />
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
                         </div>
+
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success">Kaydet</button>
-            </form>
-        </div>
+            </div>
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </form>
     </div>
 </div>
+
 

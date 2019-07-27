@@ -65,7 +65,6 @@
     </nav>
 
     <!-- alert div -->
-
     <div class="container mt-3">
         @{
             if (TempData["alertClass"] != null)
@@ -79,9 +78,12 @@
             }
         }
     </div>
+
+    <!-- RenderBody div -->
     <div id="main">
         @RenderBody()
     </div>
+
 
 </body>
 </html>
