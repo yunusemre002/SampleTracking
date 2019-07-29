@@ -1,0 +1,17 @@
+vscode:
+dotnet help
+dotnet new mvc -o [projectName] //proje oluþturma
+dotnet run //proje çalýþtýrma
+dotnet watch run // deðiþiklik sonrasý otomatik restart
+
+npm init --yes //projeye package.json dosyasý ekler
+
+80
+
+
+http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css
+
+
+add migrations
+
+dotnet ef migrations add entity_update

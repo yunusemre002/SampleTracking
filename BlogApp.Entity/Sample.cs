@@ -97,5 +97,8 @@ namespace ProjectManagement.Entity
 
         public string DelayDescription { get; set; }
         public string DeliveryTime { get; set; }  //otomatik hesaplansın (temrin-geliş)= 
+
+        public string Image { get; set; }
+        public string AdditionalFile { get; set; }
     }
 }

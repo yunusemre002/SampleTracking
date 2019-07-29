@@ -5,7 +5,7 @@
 
 
         <div id="accordion">
-            <form asp-controller="Home" asp-action="Create" method="post">
+            <form asp-controller="Home" asp-action="Create" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="card">
                     <div class="card-header" id="headingOne">
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>İstek Tarihi:</label>
-                                    <input asp-for='RequestDate'  class="form-control" />
+                                    <input asp-for='RequestDate' class="form-control" />
                                     <span asp-validation-for="RequestDate" class="text-danger"></span>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                     </select>
                                 </div>
 
-                      
+
                                 <div class="form-group col-md-4">
                                     <label>Tipi:</label>
                                     <input asp-for="SampleType" class="form-control" />
@@ -178,7 +178,27 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success">Kaydet</button>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Dosyalar
+                            </span>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Resim:</label>
+                                    <input type="file" name="file" id="file" value="" />
+                                    <span asp-validation-for="Image" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success mt-2 float-right">Kaydet</button>
             </form>
         </div>
     </div>

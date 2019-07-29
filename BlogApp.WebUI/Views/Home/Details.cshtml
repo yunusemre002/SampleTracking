@@ -1,184 +1,266 @@
 ﻿@model Sample
-@{
-    ViewData["Title"] = "Details";
-}
+
+<div class="container">
+    <h5>
+        @Model.SampleId numaralı istek.
+    </h5>
+    <div id="accordion" >
+        <form asp-controller="Home" asp-action="Details" method="post" enctype="multipart/form-data">
+            <input asp-for="SampleId" type="hidden" class="form-control" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <span class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Zorunlu Alanlar
+                        </span>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Müşteri:</label>
+                                <input asp-for="Customer" class="form-control" />
+                                <span asp-validation-for="Customer" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Çalışan:</label>
+                                <div class="form-inline">
+                                    <select asp-items="@ViewBag.Employees" asp-for="EmployeeId" class="form-control w-75">
+                                        <option selected disabled>Seçiniz</option>
+                                    </select>
+                                    <a asp-action="Create" asp-controller="Employee" class="fas fa-user-plus ml-3"></a>
+                                </div>
+                                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>İstek Tarihi:</label>
+                                <input asp-for='RequestDate' class="form-control" />
+                                <span asp-validation-for="RequestDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
+                                <label>Durumu:</label>
+                                <select asp-items="@ViewBag.States" asp-for="SampleState" class="form-control">
+                                    <option selected disabled>Seçiniz</option>
+                                </select>
+                            </div>
 
 
-<div class="row mt-3 justify-content-center">
+                            <div class="form-group col-md-4">
+                                <label>Tipi:</label>
+                                <input asp-for="SampleType" class="form-control" />
+                                <span asp-validation-for="SampleType" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Beden:</label>
+                                <input asp-for="Size" class="form-control" />
+                                <span asp-validation-for="Size" class="text-danger"></span>
+                            </div>
+                        </div>
 
-    <div class="col-md-8 ">
-        <div class="card">
-            <div class="card-header">
-                @Model.SampleId numaralı istek.
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Termin:</label>
+                                <input asp-for="Termin" class="form-control" />
+                                <span asp-validation-for="Termin" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Artikel:</label>
+                                <input asp-for="Artikel" class="form-control" />
+                                <span asp-validation-for="Artikel" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Müşteri Model No:</label>
+                                <input asp-for="CustomerModelNo" class="form-control" />
+                                <span asp-validation-for="CustomerModelNo" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Renk:</label>
+                                <input asp-for="Color" class="form-control" />
+                                <span asp-validation-for="Color" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Adet:</label>
+                                <input asp-for="RequestedCount" class="form-control" />
+                                <span asp-validation-for="RequestedCount" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Talep No:</label>
+                                <input asp-for="RequestNo" class="form-control" />
+                                <span asp-validation-for="RequestNo" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <form asp-controller="Home" asp-action="Details" method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <input type="hidden" asp-for="SampleId" />
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Müşteri:</label>
-                            <input asp-for="Customer" class="form-control" />
-                            <span asp-validation-for="Customer" class="text-danger"></span>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            İsteğe Bağlı Alanlar
+                        </span>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Model Açıklama:</label>
+                                <textarea asp-for="ModelDescription" class="form-control"></textarea>
+                                <span asp-validation-for="ModelDescription" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Aksesuar Sipariş Tarihi:</label>
+                                <input asp-for="AccessoryOrderDate" class="form-control" />
+                                <span asp-validation-for="AccessoryOrderDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Aksesuar Termin:</label>
+                                <input asp-for="AccessoryTermin" class="form-control" />
+                                <span asp-validation-for="AccessoryTermin" class="text-danger"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group col-md-4">
-                            <label>Çalışan:</label>
-                            <select asp-items="@ViewBag.Employees" asp-for="EmployeeId" class="form-control">
-                                <option selected disabled>Seçiniz</option>
-                            </select>
-                            <span asp-validation-for="EmployeeId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>İstek Tarihi:</label>
-                            <input asp-for='RequestDate' class="form-control" />
-                            <span asp-validation-for="RequestDate" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Durumu:</label>
-                            <select asp-items="@ViewBag.States" asp-for="SampleState" class="form-control">
-                                <option selected disabled>Seçiniz</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Tipi:</label>
-                            <input asp-for="SampleType" class="form-control" />
-                            <span asp-validation-for="SampleType" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Beden:</label>
-                            <input asp-for="Size" class="form-control" />
-                            <span asp-validation-for="Size" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Termin:</label>
-                            <input asp-for="Termin" class="form-control" />
-                            <span asp-validation-for="Termin" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Artikel:</label>
-                            <input asp-for="Artikel" class="form-control" />
-                            <span asp-validation-for="Artikel" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Müşteri Model No:</label>
-                            <input asp-for="CustomerModelNo" class="form-control" />
-                            <span asp-validation-for="CustomerModelNo" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Renk:</label>
-                            <input asp-for="Color" class="form-control" />
-                            <span asp-validation-for="Color" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Adet:</label>
-                            <input asp-for="RequestedCount" class="form-control" />
-                            <span asp-validation-for="RequestedCount" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Talep No:</label>
-                            <input asp-for="RequestNo" class="form-control" />
-                            <span asp-validation-for="RequestNo" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="card-header">
-                        İsteğe Bağlı Alanlar
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Model Açıklama:</label>
-                            <textarea asp-for="ModelDescription" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Aksesuar Sipariş Tarihi:</label>
-                            <input asp-for="AccessoryOrderDate" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Aksesuar Termin:</label>
-                            <input asp-for="AccessoryTermin" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Örgü Bitiş Tarihi:</label>
-                            <input asp-for="MeshFinishDate" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Boya Gönderim Tarihi:</label>
-                            <input asp-for="PaintDeliveryDate" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Boya Bitim Tarihi:</label>
-                            <input asp-for="PaintFinishDate" class="form-control" />
-                        </div>
-                    </div>
-
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Dikim Bitiş Tarihi:</label>
-                            <input asp-for="SewingFinishDate" class="form-control" />
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Örgü Bitiş Tarihi:</label>
+                                <input asp-for="MeshFinishDate" class="form-control" />
+                                <span asp-validation-for="MeshFinishDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Boya Gönderim Tarihi:</label>
+                                <input asp-for="PaintDeliveryDate" class="form-control" />
+                                <span asp-validation-for="PaintDeliveryDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Boya Bitim Tarihi:</label>
+                                <input asp-for="PaintFinishDate" class="form-control" />
+                                <span asp-validation-for="PaintFinishDate" class="text-danger"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label>Teslim Tarihi:</label>
-                            <input asp-for="DeliveryDate" class="form-control" />
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Dikim Bitiş Tarihi:</label>
+                                <input asp-for="SewingFinishDate" class="form-control" />
+                                <span asp-validation-for="SewingFinishDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Teslim Tarihi:</label>
+                                <input asp-for="DeliveryDate" class="form-control" />
+                                <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Gecikme Açıklama:</label>
+                                <textarea asp-for="DelayDescription" class="form-control"></textarea>
+                                <span asp-validation-for="DelayDescription" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Teslim Zamanı:</label>
+                                <input asp-for="DeliveryTime" class="form-control" />
+                                <span asp-validation-for="DeliveryTime" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Gecikme Açıklama:</label>
-                            <textarea asp-for="DelayDescription" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Teslim Zamanı:</label>
-                            <input asp-for="DeliveryTime" class="form-control" />
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Kaydet</button>
-                </form>
+                </div>
             </div>
-            <div class="card-footer ">
-                İşlem Geçmişi
-                <table class="table table-striped table-responsive table-sm table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Tarih</th>
-                            <th scope="col">Kullanıcı</th>
-                            <th scope="col">Yapılan İşlem</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>23.10.2015</td>
-                            <td>Yunus Emre Demir</td>
-                            <td>dkdkffasd f -> asdjfkjk sdf</td>
-                        </tr>
-                        <tr>
-                            <td>23.10.2015</td>
-                            <td>Yunus Emre Demir</td>
-                            <td>dkdkffasd f -> asdjfkjk sdf</td>
-                        </tr>
-                        <tr>
-                            <td>23.10.2015</td>
-                            <td>Yunus Emre Demir</td>
-                            <td>dkdkffasd f -> asdjfkjk sdf</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Dosyalar
+                        </span>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>Resim:</label>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <img src="~/img/@Model.Image" alt="Alternate Text" width="120" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="file" name="sampleImg" id="sampleImg" value="resim" />
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>Dosya:</label>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <a href="~/files/@Model.AdditionalFile">@Model.AdditionalFile</a>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="file" name="addFile" id="addFile" value="dosya" />
+                                <span asp-validation-for="AdditionalFile" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div>
+                <button type="submit" class="btn btn-success mt-2 float-right">Kaydet</button>
+            </div>
+
+        </form>
+    </div>
+    <br />
+    <br />
+    <div class="mt-3 ">
+        <h5 >
+            İşlem Geçmişi
+        </h5>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Tarih/saat</th>
+                    <th>Kullanıcı</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                </tr>
+                <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td>july@example.com</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+
+
+
+
 

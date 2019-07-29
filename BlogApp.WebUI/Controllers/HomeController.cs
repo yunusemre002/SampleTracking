@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectManagement.Data.Abstract;
@@ -52,13 +54,45 @@ namespace BlogApp.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Details(Sample sample)
+        public async Task<IActionResult> Details(Sample sample, IFormFile sampleImg, IFormFile addFile)
         {
+
             ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
             ViewBag.States = new SelectList(Enum.GetNames(typeof(State)));
 
             if (ModelState.IsValid)
             {
+                if (sampleImg != null)
+                {
+                    //image path
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", sampleImg.FileName);
+
+                    //image saving path
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await sampleImg.CopyToAsync(stream);
+                    }
+
+                    //image file name adding entity
+                    sample.Image = sampleImg.FileName;
+                }
+                if (addFile != null)
+                {
+                    //image path
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\files", addFile.FileName);
+
+                    //image saving path
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await addFile.CopyToAsync(stream);
+                    }
+
+                    //image file name adding entity
+                    sample.AdditionalFile = addFile.FileName;
+                }
+
+
+
                 sampleRepository.updateSample(sample);
                 TempData["alertClass"] = "success";
                 TempData["alertMessage"] = sample.SampleId + " numaralı kayıt güncellendi.";
@@ -81,14 +115,34 @@ namespace BlogApp.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Sample sample)
+        public async Task<IActionResult> Create(Sample sample, IFormFile file)
         {
             ViewBag.Employees = new SelectList(employeeRepository.GetAll(), "EmployeeId", "Name");
             ViewBag.States = new SelectList(Enum.GetNames(typeof(State)));
 
             if (ModelState.IsValid)
             {
+
+                if (file !=null)
+                {
+                    //image path
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
+
+                    //image saving path
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    //image file name adding entity
+                    sample.Image = file.FileName;
+                }
+    
+
+                //entity saving
                 Sample sampleOk = sampleRepository.addSample(sample);
+
+
                 if (sampleOk != null)
                 {
                     TempData["alertClass"] = "success";

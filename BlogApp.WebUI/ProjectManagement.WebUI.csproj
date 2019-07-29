@@ -590,4 +590,8 @@
     <TypeScriptCompile Include="node_modules\moment\moment.d.ts" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\files\" />
+  </ItemGroup>
+
 </Project>
