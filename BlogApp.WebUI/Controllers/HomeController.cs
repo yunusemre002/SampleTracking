@@ -76,6 +76,7 @@ namespace BlogApp.WebUI.Controllers
                     //image file name adding entity
                     sample.Image = sampleImg.FileName;
                 }
+              
                 if (addFile != null)
                 {
                     //image path
@@ -90,9 +91,6 @@ namespace BlogApp.WebUI.Controllers
                     //image file name adding entity
                     sample.AdditionalFile = addFile.FileName;
                 }
-
-
-
                 sampleRepository.updateSample(sample);
                 TempData["alertClass"] = "success";
                 TempData["alertMessage"] = sample.SampleId + " numaralı kayıt güncellendi.";

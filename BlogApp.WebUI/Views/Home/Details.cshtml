@@ -191,6 +191,7 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
                         <div class="form-row">
+                            <input asp-for="Image" type="hidden" class="form-control" />
                             <div class="form-group col-md-3">
                                 <label>Resim:</label>
                             </div>
@@ -198,12 +199,13 @@
                                 <img src="~/img/@Model.Image" alt="Alternate Text" width="120" />
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="file" name="sampleImg" id="sampleImg" value="resim" />
+                                <input type="file" name="sampleImg" id="sampleImg" value="" />
                                 <span asp-validation-for="Image" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="form-row">
+                            <input asp-for="AdditionalFile" type="hidden" class="form-control" />
                             <div class="form-group col-md-3">
                                 <label>Dosya:</label>
                             </div>
@@ -211,7 +213,7 @@
                                 <a href="~/files/@Model.AdditionalFile">@Model.AdditionalFile</a>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="file" name="addFile" id="addFile" value="dosya" />
+                                <input type="file" name="addFile" id="addFile" value="" />
                                 <span asp-validation-for="AdditionalFile" class="text-danger"></span>
                             </div>
                         </div>
